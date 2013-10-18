@@ -240,7 +240,7 @@ function rename(old_name, input_name) {
 	
 	
 	var doc_path = Editor.GetFilename(), 
-		doc_name = fso.GetFileName(docpath);
+		doc_name = fso.GetFileName(doc_path);
 	
 	console.log([
 			  'doc_path: ' + doc_path, 
