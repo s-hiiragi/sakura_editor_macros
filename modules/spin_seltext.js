@@ -74,7 +74,7 @@ var lists = [
 	
 	// 選択テキストを次/前のテキストに変更
 	// 連続して実行できるように、テキスト選択状態を維持する
-	Editor.Delete();
 	Editor.InsText(replacement);
-	for (var i=0; i < replacement.length; i++) Editor.Left_Sel();
+	for (var i=0; i < replacement.length; i++) Editor.Left();
+	for (var i=0; i < replacement.length; i++) Editor.Right_Sel();
 })();
