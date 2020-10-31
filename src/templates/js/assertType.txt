@@ -1,0 +1,3 @@
+if (typeof @var !== "@type") {
+	throw new TypeError(`@var was not @type (${@var} : ${typeof @var})`);
+}

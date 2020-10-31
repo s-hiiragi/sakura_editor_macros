@@ -62,6 +62,9 @@ function load(rel_module_path) {
 	
 	// ìúàﬂç\ï∂
 	var i = editor.insertln;
-	
+	var s = Editor.GetSelectedString(0);
+
+	Editor.AddRefUndoBuffer();
 	eval(Editor.GetSelectedString(0));
+	Editor.SetUndoBuffer();
 })();
