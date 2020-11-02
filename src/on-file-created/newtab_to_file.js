@@ -1,12 +1,16 @@
-/**
- * あああ
+/*
+ * 無題タブを一時ファイルに保存する
+ *
+ * ファイルとして保存することで、
+ * - 自動保存される (共通設定＞ファイルで「自動的に保存する」にチェックを入れている場合)
+ * - クラッシュ時に編集内容が残る
  */
 
 (function(){
 
 	var fso = new ActiveXObject('Scripting.FileSystemObject');
 
-	var newTabDir = 'C:\\Users\\hii\\managed\\data\\src\\sakura_editor_macros\\src\\on-file-created\\.newtab_cache';
+	var newTabDir = '.newtab_cache';
 	if (!fso.FolderExists(newTabDir)) {
 		fso.CreateFolder(newTabDir);
 	}

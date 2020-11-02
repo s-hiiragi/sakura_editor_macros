@@ -1,35 +1,71 @@
-/**
- * @file  ƒtƒ@ƒCƒ‹V‹Kì¬orƒI[ƒvƒ“‚Éon-file-created/openedƒtƒHƒ‹ƒ_ˆÈ‰º‚Ìƒ}ƒNƒ‚ğÀs
+ï»¿/**
+ * @file  ãƒ•ã‚¡ã‚¤ãƒ«æ–°è¦ä½œæˆorã‚ªãƒ¼ãƒ—ãƒ³æ™‚ã«on-file-created/openedãƒ•ã‚©ãƒ«ãƒ€ä»¥ä¸‹ã®ãƒã‚¯ãƒ­ã‚’å®Ÿè¡Œ
  */
 
-// TODO “Ç‚İ‚ñ‚¾ƒ‚ƒWƒ…[ƒ‹‚©‚çƒf[ƒ^‚ğƒGƒNƒXƒ|[ƒg‚µ‚½‚¢
-function load(relativeModulePath) {
-	var fso = new ActiveXObject('Scripting.FileSystemObject');
-	var macroDir = fso.GetParentFolderName(Editor.ExpandParameter('$M'));
-	var absoluteModulePath = fso.GetAbsolutePathName(fso.BuildPath(macroDir, relativeModulePath));
-	var textFile;
-	try {
-		textFile = fso.OpenTextFile(absoluteModulePath);
-	} catch (e) {
-		Editor.TraceOut('[E] load(): file open failed: ' + e.message + ': ' + absoluteModulePath);
-		throw e;
-	}
-	var code = textFile.ReadAll();
-	try {
-		// ƒOƒ[ƒoƒ‹•Ï”‚Íã‘‚«‚Å‚«‚é
-		eval(code);
-	} catch (e) {
-		Editor.TraceOut('[E] load(): eval() failed: ' + e.message + ': ' + absoluteModulePath);
-		throw e;
-	}
+var __fso = new ActiveXObject('Scripting.FileSystemObject');
+var __wsh = new ActiveXObject('WScript.Shell');
+
+
+/* å¤–éƒ¨ã®ã‚µã‚¯ãƒ©ã‚¨ãƒ‡ã‚£ã‚¿ãƒã‚¯ãƒ­ãƒ•ã‚¡ã‚¤ãƒ«(ãƒ¢ã‚¸ãƒ¥ãƒ¼ãƒ«)ã‚’èª­ã¿è¾¼ã‚€
+ *
+ * å¼•æ•°
+ * __relativeModulePath
+ *     Macroãƒ‡ã‚£ãƒ¬ã‚¯ãƒˆãƒª(â€»)ã‚’ãƒ«ãƒ¼ãƒˆã¨ã™ã‚‹ã€ãƒ¢ã‚¸ãƒ¥ãƒ¼ãƒ«ãƒ•ã‚¡ã‚¤ãƒ«ã®ç›¸å¯¾ãƒ‘ã‚¹
+ *     â€» å…±é€šè¨­å®šï¼ãƒã‚¯ãƒ­ã§è¨­å®šã™ã‚‹ãƒ‡ã‚£ãƒ¬ã‚¯ãƒˆãƒª
+ *
+ * æˆ»ã‚Šå€¤
+ *     èª­ã¿è¾¼ã‚“ã ãƒ¢ã‚¸ãƒ¥ãƒ¼ãƒ«ã®æœ«å°¾ã«ã‚ã‚‹å¼æ–‡ã®å€¤ã‚’è¿”ã™
+ */
+function load(__relativeModulePath) {
+    var arguments = void 0;
+    try {
+        return eval(function(){
+            var fso = typeof __fso !== 'undefined' ? __fso : new ActiveXObject('Scripting.FileSystemObject');
+            var wsh = typeof __wsh !== 'undefined' ? __wsh : new ActiveXObject('WScript.Shell');
+
+            var macroDir = fso.GetParentFolderName(Editor.ExpandParameter('$M'));
+            var absoluteModulePath = fso.BuildPath(macroDir, __relativeModulePath);
+
+            var moduleDir = fso.GetParentFolderName(absoluteModulePath);
+            wsh.CurrentDirectory = moduleDir;
+
+            var f = null;
+            try {
+                f = fso.OpenTextFile(absoluteModulePath);
+            } catch (e) {
+                Editor.TraceOut('[E] The module could not be opened (' + absoluteModulePath + '): ' + e.message);
+                throw e;
+            }
+            var code = f.AtEndOfStream ? '' : f.ReadAll();
+            f.close();
+
+            return code;
+        }());
+    } catch (e) {
+        Editor.TraceOut('[E] An error occured in the module (' + __relativeModulePath + '): ' + e.message);
+        throw e;
+    }
 }
 
-// ƒtƒ@ƒCƒ‹•Û‘¶ŒãA‚à”»’è‚µ‚æ‚¤‚Æv‚¦‚Î‚Å‚«‚»‚¤ (Cookie‚ğg‚¤)
 
-// TODO ƒfƒBƒŒƒNƒgƒŠ“à‚Ì‘S*.js‚ğ“Ç‚İ‚Ş
-if (Editor.GetFilename() == '') {
-	//load('on-file-created/hello.js');
-	load('on-file-created/newtab_to_file.js');
-} else {
-	//load('on-file-opened/hello.js');
-}
+(function(){
+    var fso = __fso;
+    var wsh = __wsh;
+
+    function loadModules(dirPath) {
+        var macroDir = fso.GetParentFolderName(Editor.ExpandParameter('$M'));
+        var dir = fso.GetFolder(fso.BuildPath(macroDir, dirPath));
+
+        var e = new Enumerator(dir.Files);
+        for (; !e.atEnd(); e.moveNext()) {
+            var modulePath = fso.BuildPath(dirPath, e.item().Name);
+            load(modulePath);
+        }
+    }
+
+    if (Editor.GetFilename() == '') {
+        loadModules('on-file-created');
+    } else {
+        loadModules('on-file-opened');
+    }
+})();
