@@ -1,5 +1,11 @@
 ﻿/*
  * format_markdown_table.js
+ *
+ * 概要
+ * - Markdownの表を整形する
+ *
+ * 使用方法
+ * - Markdownの表のいずれかの行にカーソルを置いてマクロを実行する
  */
 
 function isTableLine(line) {
