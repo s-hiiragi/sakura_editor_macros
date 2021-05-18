@@ -2,13 +2,16 @@
  *
  * §ŒÀ
  * - MarkdownŒÀ’è
+ *
+ * TODO
+ * - Œ»İ‚Ìs+1‚©‚çŒŸõ‚·‚é
  */
 
 function getSections() {
     var sections = [];
 
     var lineCount = Editor.GetLineCount(0);
-    for (var i = 1; i < lineCount; i++) {
+    for (var i = 1; i <= lineCount; i++) {
         var line = Editor.GetLineStr(i);
         if (line && line.charAt(0) === '#') {
             sections.push({

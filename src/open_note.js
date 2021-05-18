@@ -26,8 +26,8 @@ function trimExtension(path) {
 
     var notePath = null;
 
-    // 完全一致
-    // ただし、
+    // まず完全一致を試す
+    // ただし、利便性のために、
     // - 大文字/小文字は区別しない
     // - 拡張子なしで比較する
     for (var i = 0; i < files.length; i++) {
@@ -38,10 +38,10 @@ function trimExtension(path) {
         }
     }
     if (!notePath) {
-        // 前方一致
+        // 次に部分一致を試す
         for (var i = 0; i < files.length; i++) {
             var f = files[i];
-            if (f.Name.toLowerCase().indexOf(noteName.toLowerCase()) === 0) {
+            if (f.Name.toLowerCase().indexOf(noteName.toLowerCase()) >= 0) {
                 notePath = f.Path;
                 break;
             }
