@@ -38,7 +38,6 @@ function repeatString(str, n) {
     return result;
 }
 
-// TODO workに反映
 function trimHorizontalFrame(lines) {
     var trimmedLines = [];
     for (var i = 0; i < lines.length; i++) {
