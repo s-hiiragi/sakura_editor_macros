@@ -35,16 +35,17 @@ function getSections() {
     for (var i = 0; i < sections.length; i++) {
         var section = sections[i];
 
-        if (section.text === inputSection) {
+        if (section.text.toLowerCase() === inputSection.toLowerCase()) {
             sectionLine = section.line;
             break;
         }
     }
     if (!sectionLine) {
+        // •”•ªˆê’v
         for (var i = 0; i < sections.length; i++) {
             var section = sections[i];
 
-            if (section.text.indexOf(inputSection) >= 0) {
+            if (section.text.toLowerCase().indexOf(inputSection.toLowerCase()) >= 0) {
                 sectionLine = section.line;
                 break;
             }
