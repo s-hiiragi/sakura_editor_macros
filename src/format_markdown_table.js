@@ -17,9 +17,33 @@ function isDelimiterLine(line) {
 }
 
 function getFields(line) {
-    return line.replace(/^\s+|\s+$/g, '')
-        .replace(/\s*\|\s*/g, '|')  // to avoid split bug
-        .split('|');
+//    return line.replace(/^\s+|\s+$/g, '')
+//        .replace(/\s*\|\s*/g, '|')  // to avoid split bug
+//        .split('|');
+
+    line = line.replace(/^\s+|\s+$/g, '');
+
+    var fields = [];
+    var buf = '';
+    for (var i = 0; i < line.length; i++) {
+        var c = line.charAt(i);
+        if (c === '\\') {
+            buf += '\\';
+            i++;
+            if (i >= line.length) break;
+            buf += line.charAt(i);
+        } else if (c === '|') {
+            fields.push(buf.replace(/^\s+|\s+$/g, ''));
+            buf = '';
+        } else {
+            buf += c;
+        }
+    }
+    if (buf !== '') {
+        fields.push(buf.replace(/^\s+|\s+$/g, ''));
+    }
+
+    return fields;
 }
 
 function calculateWidth(str) {
