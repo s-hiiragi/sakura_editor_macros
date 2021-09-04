@@ -145,7 +145,7 @@ var console = {
 
 // main
 
-function getname(doc_name) {
+function input_newname_format(doc_name) {
 	var doc_base = doc_name.split('.')[0];
 	
 	var message = [  // 表示できるメッセージ幅に限りがあったため、文字を切り詰めた
@@ -258,7 +258,7 @@ function rename_according_to_format(old_name, format) {
 	}
 	
 	// 別名で保存
-	var new_name = rename_according_to_format(doc_name, getname(doc_name) );
+	var new_name = rename_according_to_format(doc_name, input_newname_format(doc_name) );
 	if (new_name == doc_name) return;
 	
 	sakura.save_as(new_name);
