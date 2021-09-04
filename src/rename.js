@@ -249,6 +249,7 @@ function rename_according_to_format(old_name, format) {
 
 
 	var doc_path = Editor.GetFilename(),
+		doc_dir  = fso.GetParentFolderName(doc_path);
 		doc_name = fso.GetFileName(doc_path);
 
 	console.log([
@@ -269,7 +270,8 @@ function rename_according_to_format(old_name, format) {
 	var new_name = rename_according_to_format(doc_name, newname_format);
 	if (new_name == doc_name) return;
 
-	sakura.save_as(new_name);
+    var new_path = fso.BuildPath(doc_dir, new_name);
+	sakura.save_as(new_path);
 
 	// 名前変更前のファイルを削除
 	fso.DeleteFile(doc_path);
