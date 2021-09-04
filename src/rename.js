@@ -54,7 +54,6 @@
  *   完成
  */
 
-
 // Common Objects
 var wsh_shell = new ActiveXObject('WScript.Shell'),
 	fso = new ActiveXObject('Scripting.FileSystemObject');
@@ -95,7 +94,6 @@ var sakura = {
 	}
 };
 sakura.SCRIPT_NAME = fso.GetFileName(sakura.SCRIPT_PATH);
-
 
 /**
  * プロンプトを表示 (DOM0 window.prompt)
@@ -142,9 +140,6 @@ var console = {
 //		Editor.TraceOut(m);
 	}
 };
-
-
-// main
 
 function input_newname_format(old_name) {
     /**
@@ -247,7 +242,6 @@ function rename_according_to_format(old_name, format) {
 	report();
 	return;
 	//*/
-
 
 	var doc_path = Editor.GetFilename(),
 		doc_dir  = fso.GetParentFolderName(doc_path);
