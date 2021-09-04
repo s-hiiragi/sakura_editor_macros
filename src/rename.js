@@ -164,24 +164,25 @@ function input_newname_format(old_name) {
 			'/.B   | \\.Bと同じ              | .B',
 			'/..   | /.と.の複合            | .A'
 		].join('\n');
-	var input_name;
+
+	var newname_format;
 	do {
-		var input_name = prompt(message, old_base);
-		if ( !input_name ) return;
+		var newname_format = prompt(message, old_base);
+		if ( !newname_format ) return null;
 
 		// ファイル名が不正な場合は再度入力
-		if (input_name == '.') break;  // "."はok
-		var matches = /^[\\\/]\.(.*)$/.exec(input_name);  // \\.hoge, /.hogeはok
+		if (newname_format == '.') break;  // "."はok
+		var matches = /^[\\\/]\.(.*)$/.exec(newname_format);  // \\.hoge, /.hogeはok
 		if (matches) {
 			if (matches[1] == '.') break;  // "\..", "/.."はok
 			if ( !validate_filename(matches[1]) ) continue;
 		} else {
-			if ( !validate_filename(input_name) ) continue;
+			if ( !validate_filename(newname_format) ) continue;
 		}
 	}
 	while (0);
 
-	return input_name;
+	return newname_format;
 }
 
 function rename_according_to_format(old_name, format) {
