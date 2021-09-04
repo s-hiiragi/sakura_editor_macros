@@ -184,7 +184,7 @@ function getname(doc_name) {
 	return input_name;
 }
 
-function rename(old_name, format) {
+function rename_according_to_format(old_name, format) {
 	/**
 	 * @param {string} format
      *
@@ -224,17 +224,17 @@ function rename(old_name, format) {
 	}
 	
 	// ê≥èÌån
-	assert_eq( rename('hoge.txt', 'fuga'),     'fuga.txt'  );
-	assert_eq( rename('hoge.txt', 'fuga.'),    'fuga'      );
-	assert_eq( rename('hoge.txt', 'fuga.htm'), 'fuga.htm'  );
-	assert_eq( rename('hoge.txt', '.'),        'hoge'      );
-	assert_eq( rename('hoge.txt', '.htm'),     'hoge.htm'  );
-	assert_eq( rename('hoge.txt', '\\.fuga'),  '.fuga.txt' );
-	assert_eq( rename('hoge.txt', '/.fuga'),   '.fuga.txt' );
-	assert_eq( rename('hoge.txt', '\\..'),     '.hoge'     );
-	assert_eq( rename('hoge.txt', '/..'),      '.hoge'     );
-	assert_eq( rename('hoge.txt', '\\..htm'),  '.hoge.htm' );
-	assert_eq( rename('hoge.txt', '/..htm'),   '.hoge.htm' );
+	assert_eq( rename_according_to_format('hoge.txt', 'fuga'),     'fuga.txt'  );
+	assert_eq( rename_according_to_format('hoge.txt', 'fuga.'),    'fuga'      );
+	assert_eq( rename_according_to_format('hoge.txt', 'fuga.htm'), 'fuga.htm'  );
+	assert_eq( rename_according_to_format('hoge.txt', '.'),        'hoge'      );
+	assert_eq( rename_according_to_format('hoge.txt', '.htm'),     'hoge.htm'  );
+	assert_eq( rename_according_to_format('hoge.txt', '\\.fuga'),  '.fuga.txt' );
+	assert_eq( rename_according_to_format('hoge.txt', '/.fuga'),   '.fuga.txt' );
+	assert_eq( rename_according_to_format('hoge.txt', '\\..'),     '.hoge'     );
+	assert_eq( rename_according_to_format('hoge.txt', '/..'),      '.hoge'     );
+	assert_eq( rename_according_to_format('hoge.txt', '\\..htm'),  '.hoge.htm' );
+	assert_eq( rename_according_to_format('hoge.txt', '/..htm'),   '.hoge.htm' );
 	
 	// àŸèÌån
 	
@@ -258,7 +258,7 @@ function rename(old_name, format) {
 	}
 	
 	// ï ñºÇ≈ï€ë∂
-	var new_name = rename(doc_name, getname(doc_name) );
+	var new_name = rename_according_to_format(doc_name, getname(doc_name) );
 	if (new_name == doc_name) return;
 	
 	sakura.save_as(new_name);
