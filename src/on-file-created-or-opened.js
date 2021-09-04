@@ -58,8 +58,10 @@ function load(__relativeModulePath) {
 
         var e = new Enumerator(dir.Files);
         for (; !e.atEnd(); e.moveNext()) {
-            var modulePath = fso.BuildPath(dirPath, e.item().Name);
-            load(modulePath);
+            if (/\.js$/i.test(e.item().Name)) {
+                var relativeModulePath = fso.BuildPath(dirPath, e.item().Name);
+                load(relativeModulePath);
+            }
         }
     }
 
