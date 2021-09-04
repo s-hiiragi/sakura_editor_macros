@@ -184,24 +184,28 @@ function getname(doc_name) {
 	return input_name;
 }
 
-function rename(old_name, input_name) {
+function rename(old_name, format) {
+	/**
+	 * @param {string} format
+     *
+	 *     | format    | old_name => new_name   | comment                                                              |
+	 *     | --------- | --------------------------------------------------------------------------------------------- |
+	 *     | fuga      | hoge.ext => fuga.ext   | Change the basename                                                  |
+	 *     | fuga.ext2 | hoge.ext => fuga.ext2  | Change the basename and the extension                                |
+	 *     | fuga.     | hoge.ext => fuga       | Change the basename and *remove* the extension                       |
+	 *     | .ext2     | hoge.ext => hoge.ext2  | Rename extension                                                     |
+	 *     | .         | hoge.ext => hoge       | *Remove* extension                                                   |
+	 *     | \.fuga    |                        |                                                                      |
+	 *     | /.fuga    | hoge.ext => .fuga      | Change the old name to a hidden file name                            |
+	 *     | /..       | hoge.ext => .hoge      | Change the basename to a hidden file name and *remove* the extension |
+	 *     | /..ext2   | hoge.ext => .hoge.ext2 | Change the basename to a hidden file name and rename the extension   |
+	 */
+
 	var _pair = old_name.split('.'), 
 		old_base = _pair[0], 
 		old_ext  = _pair[1] ? '.'+_pair[1] : '';
-	
-	// fuga      : hoge.ext => fuga.ext  (Rename Basename)
-	// fuga.     : hoge.ext => fuga      (Rename Basename and Remove Extension)
-	// fuga.ext2 : hoge.ext => fuga.ext2 (Rename Basename and Extension)
-	// .         : hoge.ext => hoge      (Remove Extension)
-	// .ext2     : hoge.ext => hoge.ext2 (Rename Extension)
-	// \.fuga    : 
-	// /.fuga    : hoge.ext => .fuga     (Hidden File for UNIX)
-	// 
-	// (Advanced)
-	// /..       : hoge.ext => .hoge
-	// /..ext2   : hoge.ext => .hoge.ext2
-	
-	var matches = /^([\\\/]\.)?([^.]*)(\.(.*))?$/.exec(input_name), 
+
+	var matches = /^([\\\/]\.)?([^.]*)(\.(.*))?$/.exec(format), 
 		new_base = (matches[1] ? '.': '') + (matches[2] || old_base), 
 		new_ext  = (matches[3] ? (matches[4] ? '.'+matches[4] : '') : old_ext), 
 		new_name = new_base + new_ext;
