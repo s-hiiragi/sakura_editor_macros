@@ -69,24 +69,24 @@ function validate_filename(filename)
 	if (filename == '') {
 		return false;
 	}
-	
+
 	if (/[:*?"<>|\\\/]/.test(filename)) {  //"
 		return false;
 	}
-	
+
 	if (/^\.+$/.test(filename)) {  // Ex) ".", "..", …
 		return false;
 	}
-	
+
 	return true;
 }
 
 // Sakura-editor API Wrappers
 var sakura = {
 	DIALOG_TITLE: 'Sakura-editor Macro', 
-	
+
 	SCRIPT_PATH: ExpandParameter('$M'), 
-	
+
 	save_as: function(filename) {
 		var CURRENT_CHARSET = 99, 
 			CURRENT_EOL = 0;
@@ -115,7 +115,7 @@ sakura.SCRIPT_NAME = fso.GetFileName(sakura.SCRIPT_PATH);
 		'End Function'
 	].join('\n');
 	sc.AddCode(func);
-	
+
 	prompt = function(message, default_value) {
 		var result = sc.Run('InBox', String(message), sakura.DIALOG_TITLE, default_value || '');
 		return (result !== void(0) ? result : null);
@@ -147,7 +147,7 @@ var console = {
 
 function input_newname_format(old_name) {
 	var old_base = old_name.split('.')[0];
-	
+
 	var message = [  // 表示できるメッセージ幅に限りがあったため、文字を切り詰めた
 			'新しいファイル名を入力してください。', 
 			'', 
@@ -168,7 +168,7 @@ function input_newname_format(old_name) {
 	do {
 		var input_name = prompt(message, old_base);
 		if ( !input_name ) return;
-		
+
 		// ファイル名が不正な場合は再度入力
 		if (input_name == '.') break;  // "."はok
 		var matches = /^[\\\/]\.(.*)$/.exec(input_name);  // \\.hoge, /.hogeはok
@@ -180,7 +180,7 @@ function input_newname_format(old_name) {
 		}
 	}
 	while (0);
-	
+
 	return input_name;
 }
 
@@ -209,7 +209,7 @@ function rename_according_to_format(old_name, format) {
 		new_base = (matches[1] ? '.': '') + (matches[2] || old_base), 
 		new_ext  = (matches[3] ? (matches[4] ? '.'+matches[4] : '') : old_ext), 
 		new_name = new_base + new_ext;
-	
+
 	return new_name;
 }
 
@@ -222,7 +222,7 @@ function rename_according_to_format(old_name, format) {
 	function report() {
 		alert( _log.length == 0 ? 'All ok.' : _log.join('\n') );
 	}
-	
+
 	// 正常系
 	assert_eq( rename_according_to_format('hoge.txt', 'fuga'),     'fuga.txt'  );
 	assert_eq( rename_according_to_format('hoge.txt', 'fuga.'),    'fuga'      );
@@ -235,34 +235,34 @@ function rename_according_to_format(old_name, format) {
 	assert_eq( rename_according_to_format('hoge.txt', '/..'),      '.hoge'     );
 	assert_eq( rename_according_to_format('hoge.txt', '\\..htm'),  '.hoge.htm' );
 	assert_eq( rename_according_to_format('hoge.txt', '/..htm'),   '.hoge.htm' );
-	
+
 	// 異常系
-	
+
 	report();
 	return;
 	//*/
-	
-	
+
+
 	var doc_path = Editor.GetFilename(), 
 		doc_name = fso.GetFileName(doc_path);
-	
+
 	console.log([
 			  'doc_path: ' + doc_path, 
 			+ 'doc_name: ' + doc_name
 		].join('\n'));
-	
+
 	// 未保存の場合、ファイル保存ダイアログを開く
 	if( !doc_path ) {
 		Editor.FileSave();
 		return;
 	}
-	
+
 	// 別名で保存
 	var new_name = rename_according_to_format(doc_name, input_newname_format(doc_name) );
 	if (new_name == doc_name) return;
-	
+
 	sakura.save_as(new_name);
-	
+
 	// 名前変更前のファイルを削除
 	fso.DeleteFile(doc_path);
 })();
