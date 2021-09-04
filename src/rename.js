@@ -8,15 +8,15 @@
  * Usage
  * ----
  * 新しいファイル名を入力し、[OK]ボタンを押す
- * 注意: 
+ * 注意:
  *   "."で始まるファイル名は以下の部分リネームを参照のこと
  *   "."で終わるファイル名にはリネームできない
- * 
+ *
  * << 部分リネーム機能 >>
  * 以下の書式を使うことで、拡張子だけを簡単にリネームしたりできる
- * 
+ *
  * 元のファイル名: hoge.txt
- * 
+ *
  * 入力文字列 | 意味                      | リネーム結果
  * -----------|---------------------------|-------------
  * fuga       | 拡張子より前を変更        | hoge.txt => fuga.txt
@@ -25,19 +25,19 @@
  * .          | 拡張子を削除              | hoge.txt => hoge
  * .html      | 拡張子を変更              | hoge.txt => hoge.html
  * \.fuga     | "."で始まる名前に変更     | hoge.txt => .fuga
- * /.fuga     | \.fugaと同じ              | 
- *            |                           | 
+ * /.fuga     | \.fugaと同じ              |
+ *            |                           |
  * /..        | "."で始まる＋拡張子を削除 | hoge.txt => .hoge
  */
 
 /* Tasks
  * ----
- * Done (Function List): 
+ * Done (Function List):
  *   ・ファイル名を変更できる (未保存の場合はファイル保存ダイアログを表示)
  *   ・ベースネーム部(拡張子を除く部分)だけや拡張子だけを変更できる
- * ToDo: 
+ * ToDo:
  *   ・入力文字列の通過条件のテストを行う
- * Future (Difficult to implementation): 
+ * Future (Difficult to implementation):
  *   ・
  */
 
@@ -48,19 +48,19 @@
  *   部分リネーム機能を実装
  *   部分リネーム機能のテストコードを追加
  *   テストしやすいコードに書きなおした
- *   
+ *
  * ver 1.0 at 2011/01/30 01:56:20 JST
  *   完成
  */
 
 
 // Common Objects
-var wsh_shell = new ActiveXObject('WScript.Shell'), 
+var wsh_shell = new ActiveXObject('WScript.Shell'),
 	fso = new ActiveXObject('Scripting.FileSystemObject');
 
 /**
  * ファイル名を検証
- * 
+ *
  * @param {string} filename
  * @return {boolean} false: 不正なファイル名
  */
@@ -83,12 +83,12 @@ function validate_filename(filename)
 
 // Sakura-editor API Wrappers
 var sakura = {
-	DIALOG_TITLE: 'Sakura-editor Macro', 
+	DIALOG_TITLE: 'Sakura-editor Macro',
 
-	SCRIPT_PATH: ExpandParameter('$M'), 
+	SCRIPT_PATH: ExpandParameter('$M'),
 
 	save_as: function(filename) {
-		var CURRENT_CHARSET = 99, 
+		var CURRENT_CHARSET = 99,
 			CURRENT_EOL = 0;
 		Editor.FileSaveAs(filename, CURRENT_CHARSET, CURRENT_EOL);
 	}
@@ -99,7 +99,7 @@ sakura.SCRIPT_NAME = fso.GetFileName(sakura.SCRIPT_PATH);
 /**
  * プロンプトを表示 (DOM0 window.prompt)
  * var result = prompt(message[, default]);
- * 
+ *
  * @param {string} message 表示する文字列
  * @param {string} default 初期値 (はじめに入力されている文字列)
  *                  省略した場合は空文字列 (注意: 元のAPIでは"undefined")
@@ -110,8 +110,8 @@ sakura.SCRIPT_NAME = fso.GetFileName(sakura.SCRIPT_PATH);
 	var sc = new ActiveXObject('ScriptControl');
 	sc.Language = 'VBScript';
 	var func = [
-		'Function InBox(message, title, default)', 
-		'InBox = InputBox(message, title, default)', 
+		'Function InBox(message, title, default)',
+		'InBox = InputBox(message, title, default)',
 		'End Function'
 	].join('\n');
 	sc.AddCode(func);
@@ -123,12 +123,12 @@ sakura.SCRIPT_NAME = fso.GetFileName(sakura.SCRIPT_PATH);
 })();
 
 /** メッセージボックスを表示 (DOM0 window.alert)
- * 
+ *
  * @param {string} message 表示する文字列
  */
 function alert(message) {
 	var ICON_WARNING = 48;
-	wsh_shell.Popup(String(message), 0, 
+	wsh_shell.Popup(String(message), 0,
 		sakura.DIALOG_TITLE + ': ' + sakura.SCRIPT_NAME, ICON_WARNING);
 }
 
@@ -149,19 +149,19 @@ function input_newname_format(old_name) {
 	var old_base = old_name.split('.')[0];
 
 	var message = [  // 表示できるメッセージ幅に限りがあったため、文字を切り詰めた
-			'新しいファイル名を入力してください。', 
-			'', 
-			'元のファイル名: A.txt', 
-			'', 
-			'入力  | 意味                   | 結果', 
-			'------|------------------------|------', 
-			'B     | 拡張子より前を変更     | B.txt', 
-			'B.    | 拡張子無しの名前に変更 | B', 
-			'B.htm | 通常のリネーム         | B.htm', 
-			'.     | 拡張子を削除           | B', 
-			'.htm  | 拡張子を変更           | A.htm', 
-			'\\.B   | "."で始まる名前に変更  | .B', 
-			'/.B   | \\.Bと同じ              | .B', 
+			'新しいファイル名を入力してください。',
+			'',
+			'元のファイル名: A.txt',
+			'',
+			'入力  | 意味                   | 結果',
+			'------|------------------------|------',
+			'B     | 拡張子より前を変更     | B.txt',
+			'B.    | 拡張子無しの名前に変更 | B',
+			'B.htm | 通常のリネーム         | B.htm',
+			'.     | 拡張子を削除           | B',
+			'.htm  | 拡張子を変更           | A.htm',
+			'\\.B   | "."で始まる名前に変更  | .B',
+			'/.B   | \\.Bと同じ              | .B',
 			'/..   | /.と.の複合            | .A'
 		].join('\n');
 	var input_name;
@@ -201,13 +201,13 @@ function rename_according_to_format(old_name, format) {
 	 *     | /..ext2   | hoge.ext => .hoge.ext2 | Change the basename to a hidden file name and rename the extension   |
 	 */
 
-	var _pair = old_name.split('.'), 
-		old_base = _pair[0], 
+	var _pair = old_name.split('.'),
+		old_base = _pair[0],
 		old_ext  = _pair[1] ? '.'+_pair[1] : '';
 
-	var matches = /^([\\\/]\.)?([^.]*)(\.(.*))?$/.exec(format), 
-		new_base = (matches[1] ? '.': '') + (matches[2] || old_base), 
-		new_ext  = (matches[3] ? (matches[4] ? '.'+matches[4] : '') : old_ext), 
+	var matches = /^([\\\/]\.)?([^.]*)(\.(.*))?$/.exec(format),
+		new_base = (matches[1] ? '.': '') + (matches[2] || old_base),
+		new_ext  = (matches[3] ? (matches[4] ? '.'+matches[4] : '') : old_ext),
 		new_name = new_base + new_ext;
 
 	return new_name;
@@ -243,11 +243,11 @@ function rename_according_to_format(old_name, format) {
 	//*/
 
 
-	var doc_path = Editor.GetFilename(), 
+	var doc_path = Editor.GetFilename(),
 		doc_name = fso.GetFileName(doc_path);
 
 	console.log([
-			  'doc_path: ' + doc_path, 
+			  'doc_path: ' + doc_path,
 			+ 'doc_name: ' + doc_name
 		].join('\n'));
 
