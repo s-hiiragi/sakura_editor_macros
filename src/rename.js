@@ -145,8 +145,8 @@ var console = {
 
 // main
 
-function input_newname_format(doc_name) {
-	var doc_base = doc_name.split('.')[0];
+function input_newname_format(old_name) {
+	var old_base = old_name.split('.')[0];
 	
 	var message = [  // 表示できるメッセージ幅に限りがあったため、文字を切り詰めた
 			'新しいファイル名を入力してください。', 
@@ -166,7 +166,7 @@ function input_newname_format(doc_name) {
 		].join('\n');
 	var input_name;
 	do {
-		var input_name = prompt(message, doc_base);
+		var input_name = prompt(message, old_base);
 		if ( !input_name ) return;
 		
 		// ファイル名が不正な場合は再度入力
