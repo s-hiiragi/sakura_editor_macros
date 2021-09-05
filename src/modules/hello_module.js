@@ -1,8 +1,6 @@
 /**
- * @name         <sakura-macro>/modules/hello_module.js
- * @description  サクラエディタマクロモジュールのサンプル
- * @author       s_hiiragi (https://github.com/s-hiiragi)
- * @updated      2013/10/13 06:04:10 JST
+ * @file    サクラエディタマクロモジュールのサンプル
+ * @author  s_hiiragi (https://github.com/s-hiiragi)
  */
 
 println('modulepath = ' + modulepath);

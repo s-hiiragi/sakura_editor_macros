@@ -1,8 +1,6 @@
 /**
- * @name         <sakura-macro>/modules/commons/es6.js
- * @description  ECMAScript 6 Harmony ‚ÌPolyfill
- * @author       s_hiiragi (https://github.com/s-hiiragi)
- * @updated      2013/10/14 06:57:16 JST
+ * @file     ECMAScript 6 Harmony ‚ÌPolyfill
+ * @author   s_hiiragi (https://github.com/s-hiiragi)
  */
 
 // 

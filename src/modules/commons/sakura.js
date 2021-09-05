@@ -1,8 +1,6 @@
 /**
- * @name         <sakura-macro>/modules/commons/sakura.js
- * @description  サクラエディタマクロAPIのラッパー
- * @author       s_hiiragi (https://github.com/s-hiiragi)
- * @updated      2013/10/15 03:31:40 JST
+ * @file    サクラエディタマクロAPIのラッパー
+ * @author  s_hiiragi (https://github.com/s-hiiragi)
  */
 
 // 標準出力

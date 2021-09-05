@@ -1,8 +1,6 @@
 /**
- * @name         <sakura-macro>/modules/commons/es5.js
- * @description  ES5 ‚ÌPolyfill
- * @author       s_hiiragi (https://github.com/s-hiiragi)
- * @updated      2013/10/13 12:35:16 JST
+ * @file    ES5 ‚ÌPolyfill
+ * @author  s_hiiragi (https://github.com/s-hiiragi)
  */
 
 if (!String.prototype.trim) {

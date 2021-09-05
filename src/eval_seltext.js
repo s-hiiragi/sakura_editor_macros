@@ -1,8 +1,6 @@
 /**
- * @name         eval_seltext.js
- * @description  選択テキストをマクロとして実行
- * @author       s_hiiragi (https://github.com/s-hiiragi)
- * @updated      2011/03/12 05:22:39 JST
+ * @file    選択テキストをマクロとして実行
+ * @author  s_hiiragi (https://github.com/s-hiiragi)
  */
 
 /* 使い方

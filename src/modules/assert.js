@@ -1,8 +1,6 @@
 /**
- * @name         assert.js
- * @description  <sakura-macro>/modules/commons/assert.js
- * @author       s_hiiragi (https://github.com/s-hiiragi)
- * @updated      2013/10/13 10:08:52 JST
+ * @file    modules/commons/assert.js
+ * @author  s_hiiragi (https://github.com/s-hiiragi)
  */
 
 function assert_println(caller_name, user_msg, description) {

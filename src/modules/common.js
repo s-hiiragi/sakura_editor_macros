@@ -1,8 +1,6 @@
 /**
- * @name         <sakura-macro>/modules/common.js
- * @description  サクラエディタマクロ共有コード
- * @author       s_hiiragi (https://github.com/s-hiiragi)
- * @updated      2013/10/13 08:11:49 JST
+ * @file    サクラエディタマクロ共有コード
+ * @author  s_hiiragi (https://github.com/s-hiiragi)
  */
 
 // debug が定義されていいれば、booleanに変換

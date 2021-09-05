@@ -1,8 +1,6 @@
 /**
- * @name         <sakura-macro>/modules/commons/language.js
- * @description  JavaScript言語機能の拡張
- * @author       s_hiiragi (https://github.com/s-hiiragi)
- * @updated      2013/10/13 12:17:09 JST
+ * @file    JavaScript言語機能の拡張
+ * @author  s_hiiragi (https://github.com/s-hiiragi)
  */
 
 load('commons/es5.js');

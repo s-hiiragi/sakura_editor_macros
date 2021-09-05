@@ -1,8 +1,6 @@
 /**
- * @name         template.js
- * @description  サクラエディタマクロのテンプレート
- * @author       s_hiiragi (https://github.com/s-hiiragi)
- * @updated      2013/10/13 04:44:01 JST
+ * @file    サクラエディタマクロのテンプレート
+ * @author  s_hiiragi (https://github.com/s-hiiragi)
  */
 
 // [[Global]].xxx(Editor.xxx)と同名のオブジェクトを外部公開すると
