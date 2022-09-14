@@ -2,6 +2,11 @@
  * @file ノートを開く
  *
  * TODO ノートを別名で開きたい
+ * TODO ファイル名に使えない文字を全角に変換したい
+ *
+ * 事前準備
+ *
+ * - 環境変数`SAKURA_NOTEPATH`に、ノート(.mdファイル)が格納されたフォルダのパスを設定する
  */
 
 function trimExtension(path) {
@@ -15,7 +20,12 @@ function hasExtension(path) {
 (function(){
 
     var wsh = new ActiveXObject('WScript.Shell');
-    var noteDirPath = wsh.ExpandEnvironmentStrings('%MY_MANAGED_PATH%\\note');
+    var noteDirPath = wsh.ExpandEnvironmentStrings('%SAKURA_NOTEPATH%');
+
+	if (noteDirPath.charAt(0) === '%') {
+		WarnMsg('環境変数 SAKURA_NOTEPATH を設定してください。');
+		return;
+	}
 
     var noteName = Editor.InputBox('ノート名', '', 100);
     if (!noteName) return;
