@@ -1,24 +1,48 @@
 /**
  * @file  クリップボードをマクロとして実行
  *
- * マクロの中では以下の関数が使えます。
- *
- * function p(s: string);  // テキストをアウトプットタブへ出力
- * function i(s: string);  // テキストを挿入
- *
- * マクロの中では以下の変数が使えます。
- *
- * var s: string  // 選択テキスト
- *
  * 推奨ショートカットキー: Shift+Alt+E
  */
 
-// utilities
-var p = function(s) { Editor.TraceOut(s); };
-var i = function(s) { Editor.InsText(s); };
+
+// 開いているドキュメントの改行コード
+/**
+ * @type {string}
+ */
+var nl = ['\r\n', '\r', '\n'][Editor.GetLineCode()];
+
+// 選択テキスト
+/**
+ * @type {string}
+ */
 var s = Editor.GetSelectedString(0);
 
-var result = eval(Editor.GetClipboard(0));
-if (typeof result !== 'undefined') {
-	Editor.TraceOut(result);
-}
+/**
+ * テキストをアウトプットタブへ出力
+ *
+ * @param {string} s - 文字列
+ */
+var p = function(s) { Editor.TraceOut(s); };
+
+/**
+ * テキストを挿入
+ *
+ * @param {string} s - 文字列
+ */
+var i = function(s) { Editor.InsText(s); };
+
+/**
+ * テキストを改行付きで挿入
+ *
+ * @param {string} s - 文字列
+ */
+var iln = function(s) { Editor.InsText(s + nl); };
+
+
+(function(){
+	Editor.AddRefUndoBuffer();
+
+    eval(Editor.GetClipboard(0));
+
+	Editor.SetUndoBuffer();
+})();

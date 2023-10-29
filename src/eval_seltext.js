@@ -55,10 +55,16 @@ function load(rel_module_path) {
 	load('common.js');
 	
 	// ìúàﬂç\ï∂
-	var i = editor.insertln;
+    var nl = ['\r\n', '\r', '\n'][Editor.GetLineCode()];
 	var s = Editor.GetSelectedString(0);
 
+    var p = function(s) { Editor.TraceOut(s); };
+	var i = function(s) { Editor.InsText(s); };
+    var iln = function(s) { Editor.InsText(s + nl); };
+
 	Editor.AddRefUndoBuffer();
-	eval(Editor.GetSelectedString(0));
+
+	eval(s);
+
 	Editor.SetUndoBuffer();
 })();
