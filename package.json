@@ -1,0 +1,20 @@
+{
+  "name": "sakura_editor_macros",
+  "version": "0.0.1",
+  "description": "",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "doc": "script\\convert_encoding.bat && jsdoc -r out.src -c jsdoc_conf.json README.md",
+    "clean": "script\\clean.bat"
+  },
+  "author": "s_hiiragi",
+  "license": "Apache-2.0 AND CC0-1.0",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/s-hiiragi/sakura_editor_macros"
+  },
+  "devDependencies": {
+    "jsdoc": "^3.6.7"
+  }
+}
