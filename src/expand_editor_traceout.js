@@ -1,6 +1,5 @@
 /**
- * @file     選択中の変数名をアウトプットへ出力するマクロに展開する
- * author    s_hiiragi <https://github.com/s-hiiragi>
+ * @file     選択中の変数名をアウトプットへ出力するマクロに展開
  * @version  1.0
  */
 

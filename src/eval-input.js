@@ -1,7 +1,5 @@
 /**
- * @name         eval-input.js
- * @description  入力したJScriptコードを実行
- * @author       s_hiiragi (http://github.com/s-hiiragi)
+ * @file  入力したJScriptコードを実行
  */
 
 /**

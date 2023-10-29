@@ -1,5 +1,5 @@
-﻿/*
- * ファイルをVS Codeで開く
+﻿/**
+ * @file  ファイルをVS Codeで開く
  */
 
 var codePath = 'C:\\Program Files\\Microsoft VS Code\\bin\\code.cmd';

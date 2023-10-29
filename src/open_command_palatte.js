@@ -1,6 +1,5 @@
-﻿/*
- * open_command_palatte.js
- * コマンドパレットを開く
+﻿/**
+ * @file  コマンドパレットを開く
  *
  * 推奨ショートカットキー: Ctrl+Shift+P
  */

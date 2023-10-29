@@ -1,7 +1,5 @@
 /**
- * @name         next_seltext.js
- * @description  選択テキストを次へ
- * @author       s_hiiragi (https://github.com/s-hiiragi)
+ * @file  選択テキストを次へ
  */
 
 /* 使い方

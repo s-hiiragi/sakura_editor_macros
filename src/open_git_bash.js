@@ -1,5 +1,5 @@
-/**
- * @file  Git bash‚ğŠJ‚­
+ï»¿/**
+ * @file  Git bashã‚’é–‹ã
  */
 (function(){
 	var docPath = Editor.GetFilename();
@@ -10,13 +10,13 @@
 
 	var wscriptPath = 'C:\\Windows\\SysWOW64\\wscript.exe';
 	if (!fso.FileExists(wscriptPath)) {
-		Editor.ErrorMsg(wscriptPath + '‚ªŒ©‚Â‚©‚è‚Ü‚¹‚ñ');
+		Editor.ErrorMsg(wscriptPath + 'ãŒè¦‹ã¤ã‹ã‚Šã¾ã›ã‚“');
 		return;
 	}
 
 	var gitBashPath = 'C:\\Program Files (x86)\\Git\\Git Bash.vbs';
 	if (!fso.FileExists(gitBashPath)) {
-		Editor.ErrorMsg(gitBashPath + '‚ªŒ©‚Â‚©‚è‚Ü‚¹‚ñ');
+		Editor.ErrorMsg(gitBashPath + 'ãŒè¦‹ã¤ã‹ã‚Šã¾ã›ã‚“');
 		return;
 	}
 

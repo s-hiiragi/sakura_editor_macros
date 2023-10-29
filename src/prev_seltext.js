@@ -1,7 +1,5 @@
 /**
- * @name         prev_seltext.js
- * @description  選択テキストを前へ
- * @author       s_hiiragi (https://github.com/s-hiiragi)
+ * @file  選択テキストを前へ
  */
 
 /* 使い方

@@ -1,5 +1,5 @@
-/**
- * @file  ƒtƒHƒ‹ƒ_‚ğw’è‚µ‚ÄTortoiseGit‚ÌƒƒO‰æ–Ê‚ğŠJ‚­
+ï»¿/**
+ * @file  ãƒ•ã‚©ãƒ«ãƒ€ã‚’æŒ‡å®šã—ã¦TortoiseGitã®ãƒ­ã‚°ç”»é¢ã‚’é–‹ã
  */
 (function(){
 	var docPath = Editor.GetFilename();
@@ -10,7 +10,7 @@
 	
 	var tortoiseGitProcPath = "C:\\Program Files\\TortoiseGit\\bin\\TortoiseGitProc.exe";
 	if (!fso.FileExists(tortoiseGitProcPath)) {
-		Editor.ErrorMsg(tortoiseGitProcPath + '‚ªŒ©‚Â‚©‚è‚Ü‚¹‚ñ');
+		Editor.ErrorMsg(tortoiseGitProcPath + 'ãŒè¦‹ã¤ã‹ã‚Šã¾ã›ã‚“');
 		return;
 	}
 	
