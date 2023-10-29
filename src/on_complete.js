@@ -1,7 +1,7 @@
 /**
- * @fileoverview 入力補完（拡張）
+ * @file  入力補完（拡張）
  *
- * 推奨キー割り当て: Ctrl+Space
+ * 推奨ショートカットキー: Ctrl+Space
  */
 
 // メモ:

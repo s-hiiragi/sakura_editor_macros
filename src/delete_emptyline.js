@@ -1,6 +1,5 @@
 /**
  * @file     ‹ós‚Ìíœ
- * @author   s_hiiragi <https://github.com/s-hiiragi>
  * @version  1.0
  */
 

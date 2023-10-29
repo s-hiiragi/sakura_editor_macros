@@ -5,6 +5,8 @@
  * - Escキーに本マクロを割り当てる
  * - ハイライト表示中にEscを押す
  *   ⇒ 検索マークを消去できる
+ *
+ * 推奨ショートカットキー: Esc
  */
 Editor.CancelMode();
 Editor.SearchClearMark();

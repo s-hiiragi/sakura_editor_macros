@@ -7,6 +7,8 @@
  * 事前準備
  *
  * - 環境変数`SAKURA_NOTEPATH`に、ノート(.mdファイル)が格納されたフォルダのパスを設定する
+ *
+ * 推奨ショートカットキー: Alt+N
  */
 
 function trimExtension(path) {

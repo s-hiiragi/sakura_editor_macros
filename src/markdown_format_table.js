@@ -1,11 +1,10 @@
-﻿/*
- * format_markdown_table.js
- *
- * 概要
- * - Markdownの表を整形する
+﻿/**
+ * @file  Markdownの表を整形
  *
  * 使用方法
  * - Markdownの表のいずれかの行にカーソルを置いてマクロを実行する
+ *
+ * 推奨ショートカットキー: Alt+F または Alt+T
  */
 
 function isTableLine(line) {

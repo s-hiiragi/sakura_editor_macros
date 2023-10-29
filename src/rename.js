@@ -1,7 +1,5 @@
 /**
- * @name         rename.js
- * @description  ファイル名を変更する
- * @author       s_hiiragi (http://github.com/s-hiiragi)
+ * @file  ファイル名を変更
  */
 
 /*

@@ -1,5 +1,5 @@
 /**
- * wrap selection with pre tag
+ * @file  選択テキストをpreタグで囲む
  */
 
 var seltext = Editor.GetSelectedString(0)

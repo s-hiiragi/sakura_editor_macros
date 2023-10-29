@@ -1,5 +1,5 @@
-﻿/*
- * 空行を詰める
+﻿/**
+ * @file  空行を詰める
  */
 
 Editor.AddRefUndoBuffer();

@@ -1,5 +1,7 @@
 /**
- * @file grep_selection.js
+ * @file  選択テキストでこのファイルをGrep
+ *
+ * 推奨ショートカットキー: Alt+G
  */
 
 var selection = Editor.GetSelectedString();
