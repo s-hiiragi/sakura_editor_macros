@@ -4,61 +4,50 @@
 
 var __fso = new ActiveXObject('Scripting.FileSystemObject');
 var __wsh = new ActiveXObject('WScript.Shell');
+var macroDir = __fso.GetParentFolderName(Editor.ExpandParameter('$M'));
 
-/* 外部のサクラエディタマクロファイル(モジュール)を読み込む
+/**
+ * 外部のサクラエディタマクロファイル(モジュール)を読み込む
  *
- * 引数
- * __relativeModulePath
- *     Macroディレクトリ(※)をルートとする、モジュールファイルの相対パス
- *     ※ 共通設定＞マクロで設定するディレクトリ
+ * @param {string}  __relativeModulePath - マクロフォルダ(※)からのモジュールファイルの相対パス。
+ *                                         ※ 共通設定＞マクロで設定するフォルダ。
  *
- * 戻り値
- *     読み込んだモジュールの末尾にある式文の値を返す
+ * @returns {?}  読み込んだモジュールの末尾にある式文の値
  */
 function load(__relativeModulePath) {
     var arguments = void 0;
     try {
         return eval(function(){
-            var fso = typeof __fso !== 'undefined' ? __fso : new ActiveXObject('Scripting.FileSystemObject');
-            var wsh = typeof __wsh !== 'undefined' ? __wsh : new ActiveXObject('WScript.Shell');
+            var modulePath = __fso.BuildPath(macroDir, __relativeModulePath);
+            var moduleDir = __fso.GetParentFolderName(modulePath);
+            __wsh.CurrentDirectory = moduleDir;
 
-            var macroDir = fso.GetParentFolderName(Editor.ExpandParameter('$M'));
-            var absoluteModulePath = fso.BuildPath(macroDir, __relativeModulePath);
-
-            var moduleDir = fso.GetParentFolderName(absoluteModulePath);
-            wsh.CurrentDirectory = moduleDir;
-
-            var f = null;
+            var code = '';
             try {
-                f = fso.OpenTextFile(absoluteModulePath);
+                var f = __fso.OpenTextFile(modulePath);
+                code = f.AtEndOfStream ? '' : f.ReadAll();
+                f.Close();
             } catch (e) {
-                Editor.TraceOut('[E] The module could not be opened (' + absoluteModulePath + '): ' + e.message);
+                Editor.TraceOut('ERROR: The module could not be opened (' + modulePath + '): ' + e.message);
                 throw e;
             }
-            var code = f.AtEndOfStream ? '' : f.ReadAll();
-            f.close();
-
             return code;
         }());
     } catch (e) {
-        Editor.TraceOut('[E] An error occured in the module (' + __relativeModulePath + '): ' + e.message);
+        Editor.TraceOut('ERROR: An error occured in the module (' + __relativeModulePath + '): ' + e.message);
         throw e;
     }
 }
 
 (function(){
-    var fso = __fso;
-    var wsh = __wsh;
-
     function loadModules(relativeModuleDirPath) {
-        var macroDir = fso.GetParentFolderName(Editor.ExpandParameter('$M'));
-        var dir = fso.GetFolder(fso.BuildPath(macroDir, relativeModuleDirPath));
-
+        var dir = __fso.GetFolder(__fso.BuildPath(macroDir, relativeModuleDirPath));
         var e = new Enumerator(dir.Files);
+
         for (; !e.atEnd(); e.moveNext()) {
             var filename = e.item().Name;
             if (/\.js$/i.test(filename)) {
-                var relativeModuleFilePath = fso.BuildPath(relativeModuleDirPath, filename);
+                var relativeModuleFilePath = __fso.BuildPath(relativeModuleDirPath, filename);
                 load(relativeModuleFilePath);
             }
         }
