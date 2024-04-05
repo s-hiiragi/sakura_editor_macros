@@ -5,7 +5,6 @@
 var __fso = new ActiveXObject('Scripting.FileSystemObject');
 var __wsh = new ActiveXObject('WScript.Shell');
 
-
 /* 外部のサクラエディタマクロファイル(モジュール)を読み込む
  *
  * 引数
@@ -47,25 +46,25 @@ function load(__relativeModulePath) {
     }
 }
 
-
 (function(){
     var fso = __fso;
     var wsh = __wsh;
 
-    function loadModules(dirPath) {
+    function loadModules(relativeModuleDirPath) {
         var macroDir = fso.GetParentFolderName(Editor.ExpandParameter('$M'));
-        var dir = fso.GetFolder(fso.BuildPath(macroDir, dirPath));
+        var dir = fso.GetFolder(fso.BuildPath(macroDir, relativeModuleDirPath));
 
         var e = new Enumerator(dir.Files);
         for (; !e.atEnd(); e.moveNext()) {
-            if (/\.js$/i.test(e.item().Name)) {
-                var relativeModulePath = fso.BuildPath(dirPath, e.item().Name);
-                load(relativeModulePath);
+            var filename = e.item().Name;
+            if (/\.js$/i.test(filename)) {
+                var relativeModuleFilePath = fso.BuildPath(relativeModuleDirPath, filename);
+                load(relativeModuleFilePath);
             }
         }
     }
 
-    if (Editor.GetFilename() == '') {
+    if (Editor.GetFilename() === '') {
         loadModules('on-file-created');
     } else {
         loadModules('on-file-opened');
