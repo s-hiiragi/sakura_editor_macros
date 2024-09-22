@@ -3,6 +3,8 @@
  * @version  1.0
  */
 
+// TODO 選択範囲のみ処理したい
+
 Editor.SelectAll();
 
 var allText = Editor.GetSelectedString(0);
