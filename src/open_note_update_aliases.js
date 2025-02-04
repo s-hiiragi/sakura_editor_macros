@@ -95,13 +95,10 @@ function writeAliases(settingFile, noteByAlias) {
         }
     }
 
-    for (var k in noteNameByAlias) {
-        traceout = k + '=' + noteNameByAlias[k];
-    }
-
 	// 設定ファイルにノートの別名を書き込む
 
-    var settingsFilePath = 'settings\\open_note.ini';
+    var macroDir = fso.GetParentFolderName(Editor.ExpandParameter('$M'));
+    var settingsFilePath = fso.BuildPath(macroDir, 'settings\\open_note.ini');
     writeAliases(settingsFilePath, noteNameByAlias);
 
 })();

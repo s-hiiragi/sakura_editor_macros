@@ -90,7 +90,8 @@ function getFiles(folderPath) {
 
 	// 設定ファイルからノートの別名を読み込む
 
-    var settingsFilePath = 'settings\\open_note.ini';
+    var macroDir = fso.GetParentFolderName(Editor.ExpandParameter('$M'));
+    var settingsFilePath = fso.BuildPath(macroDir, 'settings\\open_note.ini');
     var aliases = readAliases(settingsFilePath);
 
     // 開くor作成するノート名を入力
