@@ -101,8 +101,8 @@ function getFiles(folderPath) {
 
     // エイリアス名があれば置換する
 
-    if (aliases[noteName]) {
-        noteName = aliases[noteName];
+    if (aliases[noteName.toLowerCase()]) {
+        noteName = aliases[noteName.toLowerCase()];
     }
 
     // ノートファイル一覧を取得

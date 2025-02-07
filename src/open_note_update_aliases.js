@@ -90,7 +90,7 @@ function writeAliases(settingFile, noteByAlias) {
         var aliases = readAliasesFromNote(f.Path);
 
         for (var k = 0; k < aliases.length; k++) {
-            var alias = aliases[k];
+            var alias = aliases[k].toLowerCase();
             noteNameByAlias[alias] = name;
         }
     }
@@ -100,5 +100,7 @@ function writeAliases(settingFile, noteByAlias) {
     var macroDir = fso.GetParentFolderName(Editor.ExpandParameter('$M'));
     var settingsFilePath = fso.BuildPath(macroDir, 'settings\\open_note.ini');
     writeAliases(settingsFilePath, noteNameByAlias);
+
+    Editor.InfoMsg('更新完了');
 
 })();
