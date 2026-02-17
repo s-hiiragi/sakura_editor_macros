@@ -14,7 +14,7 @@
 (function(){
     var inFilename = Editor.GetFilename();
     if (!/\.khpx/.test(inFilename)) {
-        Editor.WarnMsg('ファイルの拡張子が.khpxではありません。');
+        Editor.ErrorMsg('ファイルの拡張子が.khpxではありません。');
         return;
     }
     var outFilename = inFilename.replace(/\.khpx/, '.khp');
