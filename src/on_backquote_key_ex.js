@@ -16,6 +16,7 @@
 
 switch (Editor.IsTextSelected()) {
 case 0: // 非選択状態
+case 2: // 矩形選択中
     Editor.InsText('`');
     break;
 case 1: // 選択中
@@ -32,8 +33,5 @@ case 1: // 選択中
         }
     }
     Editor.InsText(otext);
-    break;
-case 2: // 矩形選択中
-    Editor.InsText('`');
     break;
 }
