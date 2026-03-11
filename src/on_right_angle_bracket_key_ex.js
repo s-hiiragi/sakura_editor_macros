@@ -1,5 +1,5 @@
 ﻿/*
- * on_right_brace_key_ex.js
+ * on_right_angle_bracket_key_ex.js
  * '>'キー (拡張)
  *
  * 機能
