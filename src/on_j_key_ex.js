@@ -21,11 +21,16 @@ case 2: // 矩形選択中
 case 1: // 選択中
     var itext = Editor.GetSelectedString(0);
     var otext;
-    var newline = ['\r\n', '\r', '\n'][Editor.GetLineCode()];
-    if (/\n$/.test(itext)) {
-        otext = '```js' + newline + itext.replace(/\r?\n$/, '') + newline + '```' + newline;
+    if (/\n/.test(itext)) {
+        // 行選択中
+        var newline = ['\r\n', '\r', '\n'][Editor.GetLineCode()];
+        if (/\n$/.test(itext)) {
+            otext = '```js' + newline + itext.replace(/\r?\n$/, '') + newline + '```' + newline;
+        } else {
+            otext = '```js' + newline + itext + newline + '```';
+        }
     } else {
-        otext = '```js' + newline + itext + newline + '```';
+        otext = 'j';
     }
     Editor.InsText(otext);
     break;

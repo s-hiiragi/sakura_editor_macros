@@ -20,14 +20,19 @@ case 2: // 矩形選択中
     break;
 case 1: // 選択中
     var itext = Editor.GetSelectedString(0);
-    var lines = itext.replace(/\r\n/g, '\n').split('\n');
-    var newline = ['\r\n', '\r', '\n'][Editor.GetLineCode()];
-    var prefix = '- ';
     var otext;
-    if (lines[lines.length-1] === '') {
-        otext = prefix + lines.slice(0, lines.length-1).join(newline + prefix) + newline;
+    if (/\n/.test(itext)) {
+        // 行選択中
+        var newline = ['\r\n', '\r', '\n'][Editor.GetLineCode()];
+        var prefix = '- ';
+        var lines = itext.replace(/\r\n/g, '\n').split('\n');
+        if (lines[lines.length-1] === '') {
+            otext = prefix + lines.slice(0, lines.length-1).join(newline + prefix) + newline;
+        } else {
+            otext = prefix + lines.join(newline + prefix);
+        }
     } else {
-        otext = prefix + lines.join(newline + prefix);
+        otext = '-';
     }
     Editor.InsText(otext);
     break;
